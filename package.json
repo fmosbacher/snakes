@@ -1,17 +1,19 @@
 {
     "name": "snakes",
     "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
+    "description": "Snake game",
     "scripts": {
-        "dev": "webpack --watch",
+        "watch": "webpack --watch",
+        "serve": "live-server",
+        "public": "ngrok http 8080",
         "build": "webpack",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "keywords": [],
     "author": "",
-    "license": "ISC",
+    "license": "MIT License",
     "dependencies": {
+        "ngrok": "^3.2.7",
         "ts-loader": "^7.0.5",
         "typescript": "^3.9.5",
         "webpack": "^4.43.0",

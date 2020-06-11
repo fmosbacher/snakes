@@ -34,7 +34,7 @@ export default class Renderer {
                 if ((i + j) % 2) {
                     color = '#fff'
                 } else {
-                    color = '#fafafa'
+                    color = '#eee'
                 }
 
                 this.drawRect(i * gridSize, j * gridSize, gridSize, color)
