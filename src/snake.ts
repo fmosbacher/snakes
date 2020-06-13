@@ -7,7 +7,6 @@ export default class Snake {
     brain: DenseLayer[]
     maxMoves: number
     remainingMoves: number
-    possibleDirections: Vector2d[]
 
     score: number = 0
     isAlive: boolean = true
@@ -20,17 +19,17 @@ export default class Snake {
         ]
         this.maxMoves = maxMoves
         this.remainingMoves = maxMoves
-        this.possibleDirections = [
+    }
+
+    predictMove(state: number[]): Vector2d {
+        let inputs = state
+        let outputs: number[]
+        const possibleDirections = [
             new Vector2d(0, -1),
             new Vector2d(1, 0),
             new Vector2d(0, 1),
             new Vector2d(-1, 0)
         ]
-    }
-
-    predictMove(state: number[]): Vector2d {
-        let inputs = state
-        let outputs
 
         for (const layer of this.brain) {
             outputs = layer.activate(inputs)
@@ -39,7 +38,7 @@ export default class Snake {
 
         const dirIndex = outputs.indexOf(Math.max(...outputs))
 
-        return this.possibleDirections[dirIndex]
+        return possibleDirections[dirIndex]
     }
 
     move(direction: Vector2d): void {
@@ -53,22 +52,6 @@ export default class Snake {
 
         if (this.remainingMoves < 0) {
             this.isAlive = false
-        }
-    }
-
-    crossWalls(boardSize: number): void {
-        let head = this.body[0]
-
-        if (head.x == -1) {
-            head.x = boardSize - 1
-        } else if (head.x === boardSize) {
-            head.x = 0
-        }
-
-        if (head.y === -1) {
-            head.y = boardSize - 1
-        } else if (head.y === boardSize) {
-            head.y = 0
         }
     }
 
