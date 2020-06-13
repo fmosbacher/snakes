@@ -13,6 +13,7 @@
     "author": "",
     "license": "MIT License",
     "dependencies": {
+        "live-server": "^1.2.1",
         "ngrok": "^3.2.7",
         "ts-loader": "^7.0.5",
         "typescript": "^3.9.5",
