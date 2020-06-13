@@ -53,13 +53,18 @@ export default class Renderer {
                 const xOffset = i % numCols
                 const yOffset = Math.floor(i / numCols)
 
+                const colorStep = 200 / snakes[i].body.length
+                let green = 255
+
                 for (let part of snakes[i].body) {
                     this.drawRect(
                         xOffset * gridSize + part.x * stepSize,
                         yOffset * gridSize + part.y * stepSize,
                         stepSize,
-                        '#0f0'
+                        `rgb(0, ${green}, 0)`
                     )
+
+                    green -= colorStep
                 }
             }
         }
