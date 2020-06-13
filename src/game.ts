@@ -2,7 +2,7 @@ import Food from './food'
 import Vector2d from './vector2d'
 import Snake from './snake'
 
-interface Pair {
+type Pair = {
     snake: Snake,
     food: Food
 }
@@ -53,7 +53,6 @@ export default class Game {
 
             pair.snake.move(direction)
 
-            // pair.snake.crossWalls(this.boardSize)
             pair.snake.checkCollisions(this.boardSize)
             this.feedSnake(pair)
         }
@@ -112,13 +111,26 @@ export default class Game {
         ]
     }
 
+    getRandomFoodPosition(snake: Snake): Vector2d {
+        const foodPosition = this.getRandomPosition()
+
+        for (let part of snake.body) {
+            if (foodPosition.isEqual(part)) {
+                return this.getRandomFoodPosition(snake)
+            }
+        }
+
+        return foodPosition
+    }
+
     feedSnake(pair: Pair): void {
         const head = pair.snake.body[0]
 
         if (head.isEqual(pair.food.position)) {
             pair.snake.grow()
             pair.snake.score += 1
-            pair.food = new Food(this.getRandomPosition())
+            const foodInitialPos = this.getRandomFoodPosition(pair.snake)
+            pair.food = new Food(foodInitialPos)
         }
     }
 

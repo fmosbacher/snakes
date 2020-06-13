@@ -16,7 +16,7 @@ let mutationRate: number
 let game: Game
 let evolution: Evolution
 let renderer: Renderer
-let generation = 1
+let generation: number
 
 document.querySelector('button')
     .addEventListener('click', () => {
@@ -38,9 +38,13 @@ document.querySelector('button')
 
         for (let i = 0; i < populationSize; i++) {
             const snakeInitialPos = game.getRandomPosition()
-            const foodInitialPos = game.getRandomPosition()
-            game.addPair(new Snake(snakeInitialPos, maxMoves), new Food(foodInitialPos))
+            const snake = new Snake(snakeInitialPos, maxMoves)
+            const foodInitialPos = game.getRandomFoodPosition(snake)
+            const food = new Food(foodInitialPos)
+            game.addPair(snake, food)
         }
+
+        generation = 1
 
         run()
     })
