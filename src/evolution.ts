@@ -82,20 +82,24 @@ export default class Evolution {
         const offspring = new Snake(initialPos, a.maxMoves)
 
         for (let i = 0; i < offspring.brain.length; i++) {
-            const layer = offspring.brain[i]
-
-            for (let row = 0; row < layer.weights.length; row++) {
-                for (let col = 0; col < layer.weights[row].length; col++) {
-                    const chosenSnake = Math.random() < 0.5 ? a : b
-                    const chosenWeight = chosenSnake.brain[i].weights[row][col]
-                    layer.weights[row][col] = chosenWeight
+            // Weights
+            for (let j = 0; j < offspring.brain[i].weights.length; j++) {
+                const cutIndex = Math.floor(Math.random() * offspring.brain[i].weights[j].length)
+                for (let k = 0; k < offspring.brain[i].weights[j].length; k++) {
+                    offspring.brain[i].weights[j][k] = cutIndex < k
+                        ? a.brain[i].weights[j][k]
+                        : b.brain[i].weights[j][k]
                 }
             }
 
-            for (let j = 0; j < layer.biases.length; j++) {
-                const chosenSnake = Math.random() < 0.5 ? a : b
-                const chosenBias = chosenSnake.brain[i].biases[j]
-                layer.biases[j] = chosenBias
+            // Biases
+            for (let i = 0; i < offspring.brain.length; i++) {
+                const cutIndex = Math.floor(Math.random() * offspring.brain[i].biases.length)
+                for (let j = 0; j < offspring.brain[i].biases[j]; j++) {
+                    offspring.brain[i].biases[j] = cutIndex < j
+                        ? a.brain[i].biases[j]
+                        : b.brain[i].biases[j]
+                }
             }
         }
 
