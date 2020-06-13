@@ -14,8 +14,8 @@ export default class Snake {
     constructor(initialPos: Vector2d, maxMoves: number) {
         this.body = [initialPos]
         this.brain = [
-            new DenseLayer(6, 4),
-            new DenseLayer(4, 4)
+            new DenseLayer(8, 8),
+            new DenseLayer(8, 4)
         ]
         this.maxMoves = maxMoves
         this.remainingMoves = maxMoves

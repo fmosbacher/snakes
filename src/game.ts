@@ -64,6 +64,9 @@ export default class Game {
 
         const foodIsUp = head.y > pair.food.position.y
         const foodIsRight = head.x < pair.food.position.x
+        const foodIsDown = head.y < pair.food.position.y
+        const foodIsLeft = head.x > pair.food.position.x
+
         let hasObstacleAbove = false
         let hasObstacleRight = false
         let hasObstacleBelow = false
@@ -104,6 +107,8 @@ export default class Game {
         return [
             foodIsUp ? 1 : 0,
             foodIsRight ? 1 : 0,
+            foodIsDown ? 1 : 0,
+            foodIsLeft ? 1 : 0,
             hasObstacleAbove ? 1 : 0,
             hasObstacleRight ? 1 : 0,
             hasObstacleBelow ? 1 : 0,
