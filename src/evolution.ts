@@ -1,6 +1,7 @@
 import Game from './game'
 import Snake from './snake'
 import Food from './food'
+import { randomGaussian } from './utils'
 
 export default class Evolution {
 
@@ -102,20 +103,18 @@ export default class Evolution {
     }
 
     mutate(offspring: Snake): void {
-        const adjust = 0.05
-
         for (let layer of offspring.brain) {
             for (let row = 0; row < layer.weights.length; row++) {
                 for (let col = 0; col < layer.weights[row].length; col++) {
                     if (Math.random() < this.mutationRate) {
-                        layer.weights[row][col] += Math.random() * adjust - adjust / 2
+                        layer.weights[row][col] += randomGaussian()
                     }
                 }
             }
 
             for (let j = 0; j < layer.biases.length; j++) {
                 if (Math.random() < this.mutationRate) {
-                    layer.biases[j] += Math.random() * adjust - adjust / 2
+                    layer.biases[j] += randomGaussian()
                 }
             }
         }

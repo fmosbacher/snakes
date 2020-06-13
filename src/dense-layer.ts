@@ -1,3 +1,5 @@
+import { randomGaussian } from './utils'
+
 export default class DenseLayer {
 
     numInputs: number
@@ -19,7 +21,7 @@ export default class DenseLayer {
             weights[i] = []
 
             for (let j = 0; j < this.numOutputs; j++) {
-                weights[i].push(Math.random() * 2 - 1)
+                weights[i].push(randomGaussian())
             }
         }
 
@@ -30,7 +32,7 @@ export default class DenseLayer {
         let biases = []
 
         for (let i = 0; i < this.numOutputs; i++) {
-            biases.push(Math.random() * 2 - 1)
+            biases.push(randomGaussian())
         }
 
         return biases
